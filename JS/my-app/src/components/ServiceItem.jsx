@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import StatusIndicator from './StatusIndicator';
 import DetailItem from './DetailItem';
 
@@ -44,6 +44,7 @@ const styles = {
     flexDirection: 'row',
     gap: '15px',
     cursor: 'pointer',
+    flexWrap: 'wrap',
   }),
   serviceMainHover: {
   },

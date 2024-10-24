@@ -119,10 +119,10 @@ function ServiceStatus() {
         {Object.entries(status).map(([service, serviceStatus]) => (<ServiceItem key={service} service={service} serviceStatus={serviceStatus} openModal={openModal} />))}
 
         <div style={styles.controlButtons}>
-          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'lightgreen' }} type="button" onClick={() => controlService('start')}>Start Services</button>
+          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: '#72c872' }} type="button" onClick={() => controlService('start')}>Start Services</button>
           <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'orange' }} type="button" onClick={() => controlService('restart')}>Restart Services</button>
-          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'red' }} type="button" onClick={() => controlService('stop')}>Stop Services</button>
-          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'red' }} type="button" onClick={() => controlService('emergency')}>Stop I/O</button>
+          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: '#d92222' }} type="button" onClick={() => controlService('stop')}>Stop Services</button>
+          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: '#d92222' }} type="button" onClick={() => controlService('emergency')}>Stop I/O</button>
         </div>
       </div>
 
@@ -194,6 +194,7 @@ const styles = {
     flexDirection: 'row',
     gap: '10px',
     justifyContent: 'center',
+    flexWrap: 'wrap',
   },
   primaryButton: {
     backgroundColor: '#0086c9',

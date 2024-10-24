@@ -16,6 +16,7 @@ const StatusIndicator = ({ service, status }) => {
   }
 
   const convertDate = (date) => {
+    if (date === 'N/A') return date;
     return moment(date).format('YYYY/MM/DD HH:mm');
   }
 
@@ -42,7 +43,7 @@ const styles = {
     alignItems: 'center',
   },
   status: (status) => ({
-    backgroundColor: status === 'running' ? 'lightgreen' : 'red',
+    backgroundColor: status === 'running' ? '#72c872' : '#d92222',
     borderRadius: '4px',
     padding: '4px',
     fontSize: '10px',
