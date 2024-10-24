@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import StatusIndicator from './StatusIndicator';
-import DetailItem from './DetailItem';
 import { useCookies } from 'react-cookie';
+import ServiceItem from './ServiceItem';
 
 // Mock data to simulate API responses
 const mockData = {
@@ -24,6 +23,32 @@ const mockData = {
     cpu: "1.5%",
     logs: [
       { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initializedService initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
+      { time: "2023-09-11 11:00:00", message: "Service initialized" },
       { time: "2023-09-11 11:02:00", message: "Connecting to database" }
     ]
   }
@@ -33,7 +58,6 @@ function ServiceStatus() {
   const [status, setStatus] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-  const [openDetails, setOpenDetails] = useState({});
   const [cookies] = useCookies(['user', 'firstName', 'lastName']);
 
   useEffect(() => {
@@ -56,7 +80,6 @@ function ServiceStatus() {
       console.log(action)
       return;
     }
-    console.log(action)
 
     const user = {
       first_name: cookies.firstName,
@@ -89,57 +112,24 @@ function ServiceStatus() {
     setShowModal(true);
   }
 
-  function toggleDetails(service) {
-    setOpenDetails(prev => ({ ...prev, [service]: !prev[service] }));
-  }
-
   return (
     <>
       <h1 style={styles.title}>Service Status</h1>
       <div style={styles.services}>
-        {Object.entries(status).map(([service, serviceStatus]) => (
-          <div key={service} style={styles.serviceMain}>
-            <img src={`https://www.svgrepo.com/show/42661/server.svg`} alt={service} style={{width: '50px', filter: 'invert(100%)'}} />
-            <div style={styles.serviceLeft}>
-              <StatusIndicator service={service} status={serviceStatus} />
-              {openDetails[service] && (
-                <div style={styles.details}>
-                  <DetailItem label="Main PID" value={serviceStatus.main_pid} />
-                  <DetailItem label="Tasks" value={serviceStatus.tasks} />
-                  <DetailItem label="CPU" value={serviceStatus.cpu} />
-                </div>
-              )}
-              <label>
-                <input
-                  type="checkbox"
-                  name="services"
-                  value={service}
-                />
-              </label>
-            </div>
-            <div style={styles.serviceRight}>
-              <button style={styles.primaryButton} type="button" onClick={() => openModal(service)}>
-                View Logs
-              </button>
-              <button style={{ ...styles.primaryButton, backgroundColor: '#57625a' }} type="button" onClick={() => toggleDetails(service)}>
-                {openDetails[service] ? 'Show Less' : 'Show More'}
-              </button>
-            </div>
-          </div>
-        ))}
+        {Object.entries(status).map(([service, serviceStatus]) => (<ServiceItem key={service} service={service} serviceStatus={serviceStatus} openModal={openModal} />))}
 
         <div style={styles.controlButtons}>
-          <button style={{...styles.primaryButton, color: 'black', backgroundColor: 'lightgreen'}} type="button" onClick={() => controlService('start')}>Start Services</button>
-          <button style={{...styles.primaryButton, color: 'black', backgroundColor: 'orange'}} type="button" onClick={() => controlService('restart')}>Restart Services</button>
-          <button style={{...styles.primaryButton, color: 'black', backgroundColor: 'red'}} type="button" onClick={() => controlService('stop')}>Stop Services</button>
-          <button style={{...styles.primaryButton, color: 'black', backgroundColor: 'red'}} type="button" onClick={() => controlService('emergency')}>Stop I/O</button>
+          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'lightgreen' }} type="button" onClick={() => controlService('start')}>Start Services</button>
+          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'orange' }} type="button" onClick={() => controlService('restart')}>Restart Services</button>
+          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'red' }} type="button" onClick={() => controlService('stop')}>Stop Services</button>
+          <button style={{ ...styles.primaryButton, color: 'black', backgroundColor: 'red' }} type="button" onClick={() => controlService('emergency')}>Stop I/O</button>
         </div>
       </div>
 
       {showModal && (
         <div style={stylesLog.main}>
-          <h2 style={stylesLog.title}>Logs for {selectedService}</h2>
           <button style={stylesLog.button} onClick={() => setShowModal(false)}>❌</button>
+          <h2 style={stylesLog.title}>Logs for {selectedService}</h2>
           <pre style={stylesLog.logs}>
             {selectedService && status[selectedService].logs.map((log, index) => (
               <div style={stylesLog.log} key={index}>{log.time} - {log.message}</div>
@@ -167,14 +157,18 @@ const stylesLog = {
     color: 'white',
     backgroundColor: 'transparent',
     border: 'none',
-    position: 'relative',
-    right: '20px',
-    top: '20px',
+    float: 'right',
+    cursor: 'pointer',
   },
   logs: {
+    marginTop: '10px',
+    height: '300px',
+    backgroundColor: '#1f1f1f',
+    borderRadius: '5px',
     color: 'white',
     padding: '20px',
     whiteSpace: 'pre-wrap',
+    overflowY: 'scroll',
   },
   log: {
     color: 'lightgray',
@@ -195,38 +189,11 @@ const styles = {
     marginRight: '10px',
     marginLeft: '10px',
   },
-  serviceMain: {
-    border: '1px solid #344054',
-    borderRadius: '10px',
-    padding: '10px',
-    paddingLeft: '15px',
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '15px',
-  },
-  serviceMainHover: {
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '3px',
-  },
-  serviceLeft: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
   controlButtons: {
     display: 'flex',
     flexDirection: 'row',
     gap: '10px',
     justifyContent: 'center',
-  },
-  serviceRight: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
   },
   primaryButton: {
     backgroundColor: '#0086c9',

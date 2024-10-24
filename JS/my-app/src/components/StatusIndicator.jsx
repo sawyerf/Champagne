@@ -1,10 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 
 const StatusIndicator = ({ service, status }) => {
   const getStatusInfo = (status) => {
     const loadedMatch = status.loaded.match(/loaded \((.*?)\)/);
     const activeMatch = status.active.match(/(active|inactive) \((.*?)\)(?: since (.*?);)?/);
-    console.log(status)
 
     return {
       loadedStatus: loadedMatch ? loadedMatch[1] : 'Unknown',
@@ -15,14 +15,18 @@ const StatusIndicator = ({ service, status }) => {
     };
   }
 
+  const convertDate = (date) => {
+    return moment(date).format('YYYY/MM/DD HH:mm');
+  }
+
   const { activeStatus, since, uptime } = getStatusInfo(status);
 
   return (
     <div style={styles.mainStatus}>
       <h2 style={styles.serviceTitle}>{service}</h2>
       <div style={styles.status(activeStatus)}>{activeStatus.charAt(0).toUpperCase() + activeStatus.slice(1)}</div>
-      <div style={styles.detail}> Since: {since}</div>
-      <div style={styles.detail}> Uptime: {uptime} </div>
+      <div style={styles.detail}> <strong>Since: </strong>{convertDate(since)}</div>
+      <div style={styles.detail}> <strong>Uptime: </strong>{uptime ? uptime : 'N/A'} </div>
     </div>
   );
 }
