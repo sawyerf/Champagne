@@ -160,7 +160,8 @@ const stylesLog = {
   },
   logs: {
     marginTop: '10px',
-    height: '300px',
+    maxHeight: '300px',
+    height: '100%',
     backgroundColor: '#1f1f1f',
     borderRadius: '5px',
     color: 'white',

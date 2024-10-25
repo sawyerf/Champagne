@@ -18,8 +18,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    overflowY: 'scroll',
   },
   main: {
+    maxHeight: '100vh',
     width: '100%',
     maxWidth: '800px',
   }
