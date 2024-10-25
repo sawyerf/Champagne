@@ -144,8 +144,6 @@ function ServiceStatus() {
 const stylesLog = {
   main: {
     backgroundColor: '#181818',
-    // padding: '20px',
-    // borderRadius: '10px',
     margin: '10px',
     marginTop: '20px',
   },

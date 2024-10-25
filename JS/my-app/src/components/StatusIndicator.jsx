@@ -40,7 +40,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     gap: '7px',
-    alignItems: 'center',
+    alignItems: 'top',
   },
   status: (status) => ({
     backgroundColor: status === 'running' ? '#72c872' : '#d92222',
@@ -48,6 +48,7 @@ const styles = {
     padding: '4px',
     fontSize: '10px',
     width: 'min-content',
+    height: 'min-content',
   }),
   detail: {
     color: 'lightgray',
