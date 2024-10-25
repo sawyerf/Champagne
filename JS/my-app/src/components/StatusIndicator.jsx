@@ -17,7 +17,7 @@ const StatusIndicator = ({ service, status }) => {
 
   const convertDate = (date) => {
     if (date === 'N/A') return date;
-    return moment(date).format('YYYY/MM/DD HH:mm');
+    return moment(new Date(date)).format('YYYY/MM/DD HH:mm');
   }
 
   const { activeStatus, since, uptime } = getStatusInfo(status);
