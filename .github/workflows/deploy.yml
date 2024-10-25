@@ -26,8 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        working-directory: ./JS/my-app
         uses: actions/checkout@v4
       - name: Setup Node
+        working-directory: ./JS/my-app
         uses: actions/setup-node@v4
         with:
           node-version: "20"
