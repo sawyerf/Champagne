@@ -1,2 +1,9 @@
-lol:
-  lel: lol
+test_list:
+- 25
+- 29
+- 34
+test_user:
+  age: 51
+  height: 180
+  name: test
+  weight: 70
