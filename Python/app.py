@@ -12,9 +12,12 @@ app = create_app()
 lock = Lock()
 
 def read_yaml():
-    with open('config.yaml') as file:
-        config = yaml.safe_load(file)
-        return config
+    try:
+        with open('config.yaml') as file:
+            config = yaml.safe_load(file)
+            return config
+    except:
+        return None
 
 def write_yaml(config):
     with open('config.yaml', 'w+') as file:
@@ -57,5 +60,8 @@ def config_put(key, var=None):
             if type(config[key][var]) not in [int, float, str] or type(body[var]) not in [int, float, str]:
                 return {'error': 'type mismatch'}, 400
             config[key][var] = body[var]
-        write_yaml(config)
+        try:
+            write_yaml(config)
+        except:
+            return {'error': 'Error writing file'}, 500
     return {'success': 'variable updated'}, 200

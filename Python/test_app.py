@@ -60,6 +60,10 @@ def test_config_put_var(client):
     # test good request
     response = client.put('/config/test_user/age', json={'age': 30})
     assert response.status_code == 200
+    response = client.put('/config/test_user/name', json={'name': 'lol'})
+    assert response.status_code == 200
+    reponse = client.put('/config/test_user/height', json={'height': 180.4})
+    assert response.status_code == 200
 
     # test unknown var
     response = client.put('/config/test_user/unknown', json={'unknown':'test'})
@@ -78,6 +82,6 @@ def test_config_put_var(client):
     assert response.status_code == 200
     data = yaml.safe_load(response.data)
     assert data['test_user']['age'] == 30
-    assert data['test_user']['name'] == 'test'
-    assert data['test_user']['height'] == 180
+    assert data['test_user']['name'] == 'lol'
+    assert data['test_user']['height'] == 180.4
     assert data['test_user']['weight'] == 70
